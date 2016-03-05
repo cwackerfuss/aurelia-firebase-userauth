@@ -1,0 +1,21 @@
+<template>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h1>New Post by ${account.email}</h1>
+      <form role="form" submit.delegate="post()" class="au-target">
+        <div class="form-group">
+          <label for="fn">Title</label>
+          <input type="text" value.bind="title" class="form-control au-target" id="title">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea type="text" value.bind="description" class="form-control au-target" id="description"></textarea>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+    </div>
+  </div>
+
+</template>
