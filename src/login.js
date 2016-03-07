@@ -1,9 +1,8 @@
-import Firebase from 'github:firebase/firebase-bower@2.4.1';
-import {FirebaseAuth} from 'services/auth';
+import {Auth} from 'services/auth';
 import {Router} from 'aurelia-router';
 import {inject} from 'aurelia-framework';
 
-@inject(Router, FirebaseAuth)
+@inject(Router, Auth)
 export class Login {
 
   heading = 'Log In';
@@ -12,9 +11,9 @@ export class Login {
   hasFormError = false;
   formErrorMessage = '';
 
-  constructor(router, firebaseAuth) {
+  constructor(router, auth) {
     this.router = router;
-    this.auth = firebaseAuth;
+    this.auth = auth;
   }
 
   post() {
@@ -27,7 +26,7 @@ export class Login {
         this.toggleFormError(error);
       } else {
         console.log("Authenticated successfully with payload:", authData);
-        this.auth.getAccount();
+        this.auth.getAccountDetails();
         this.router.navigate('posts');
       }
     });

@@ -1,38 +1,50 @@
-export class FirebaseAuth {
+import Firebase from 'github:firebase/firebase-bower@2.4.1';
 
-  firebase = new Firebase('http://wackerfuss-usersite.firebaseio.com');
+export class Auth {
+
 
   constructor() {
-    this.authData = this.firebase.getAuth();
+    this.firebase = new Firebase('http://wackerfuss-usersite.firebaseio.com');
+    this.usersRef = this.firebase.child("users");
+    this.postsRef = this.firebase.child("posts");
+    this.account = null;
+    this.getAccountDetails();
   }
 
-
-
-
-  getAccount() {
+  getAccountDetails() {
 
     var authData = this.firebase.getAuth();
 
     if (authData) {
       this.account = {
-        isLoggedIn: true,
         email: authData.password.email,
-        username: authData.password.email,
         avatar: authData.password.profileImageURL,
         uid: authData.uid
-      }
-    } else {
-      this.account = {
-        isLoggedIn: false
-      }
-    }
-    return this.account;
-  }
+      };
 
+      this.thisUserRef = this.firebase.child(this.account.uid);
+
+    } else {
+      this.account = null;
+    };
+
+  }
 
   logout() {
     this.firebase.unauth();
-    this.getAccount();
+    this.getAccountDetails();
+  }
+
+  upvote() {
+
+    if (authData) {
+      this.firebase.child("users").child(uuid).once("value", (snap) => {
+        console.log(snap);
+      })
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

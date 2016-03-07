@@ -20,7 +20,7 @@
         </li>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right" if.bind="!auth.account.isLoggedIn">
+      <ul class="nav navbar-nav navbar-right" if.bind="!auth.account">
         <li>
           <a route-href="route: login;">Log In</a>
         </li>
@@ -29,14 +29,14 @@
         </li>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right" if.bind="auth.account.isLoggedIn">
+      <ul class="nav navbar-nav navbar-right" if.bind="auth.account">
         <li>
           <a href="#" style="padding: 7px 5px;">
             <img src="${auth.account.avatar}" style="border-radius: 50%; width: 35px; height: auto;">
           </a>
         </li>
         <li class="dropdown" style="padding-right: 20px;">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${auth.account.username} <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${auth.account.email} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li>
               <a href="#" click.delegate="logout()">Logout</a>

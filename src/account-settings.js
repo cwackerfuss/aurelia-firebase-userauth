@@ -1,9 +1,8 @@
-import Firebase from 'github:firebase/firebase-bower@2.4.1';
-import {FirebaseAuth} from 'services/auth';
+import {Auth} from 'services/auth';
 import {Router} from 'aurelia-router';
 import {inject} from 'aurelia-framework';
 
-@inject(Router, FirebaseAuth)
+@inject(Router, Auth)
 export class AccountSettings {
 
   heading = 'Account Settings';
@@ -12,11 +11,9 @@ export class AccountSettings {
   hasFormError = false;
   formErrorMessage = '';
 
-  constructor(router, firebaseAuth) {
+  constructor(router, auth) {
     this.router = router;
-    this.auth = firebaseAuth;
-    console.log(this);
-    this.account = this.auth.getAccount();
+    this.auth = auth;
   }
 
 }

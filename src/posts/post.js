@@ -1,18 +1,23 @@
-// src/posts.js
-import Firebase from 'github:firebase/firebase-bower@2.4.1';
-import $ from 'jquery';
+import {Auth} from 'services/auth';
+import {inject} from 'aurelia-framework';
 
+@inject(Auth)
 export class Post {
 
   heading = 'Post';
-  firebase = new Firebase('https://wackerfuss-usersite.firebaseio.com');
 
+  constructor(auth) {
+    this.auth = auth;
+  }
 
   activate(params, routeConfig){
-    var postId = params.id;
-    this.postRef = this.firebase.child("posts/" + postId);
+    this.getPostData(params.id);
+  }
 
-    this.postRef.on("value", (snapshot) => {
+  getPostData(id) {
+    let postRef = this.auth.postsRef.child(id);
+
+    postRef.on("value", (snapshot) => {
       this.post = snapshot.val();
       console.log(this);
     }, function (errorObject) {

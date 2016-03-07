@@ -1,20 +1,27 @@
 import Firebase from 'github:firebase/firebase-bower@2.4.1';
-import {FirebaseAuth} from 'services/auth';
-import {Router} from 'aurelia-router';
 import {inject} from 'aurelia-framework';
+import {Router} from 'aurelia-router';
+import {Auth} from 'services/auth';
+import {RandomPosts} from 'random-posts';
 
-@inject(Router, FirebaseAuth)
+@inject(Router, Auth)
 export class Newpost {
 
   title = '';
   description = '';
   date = '';
 
-  constructor(router, firebaseAuth) {
+  constructor(router, auth) {
     this.router = router;
-    this.auth = firebaseAuth;
-    this.account = this.auth.getAccount();
-    console.log(this.account);
+    this.auth = auth;
+    this.randomPosts = RandomPosts;
+    console.log("New Post Object: ", this);
+  }
+
+  fillForm() {
+    let randomPost = this.randomPosts[Math.floor((Math.random() * this.randomPosts.length) + 1)];
+    this.title = randomPost['Title'];
+    this.description = randomPost['Description'];
   }
 
   sanitizeTitleForUrl(title) {
@@ -30,16 +37,21 @@ export class Newpost {
 
     var urlTitle = this.sanitizeTitleForUrl(this.title);
 
-    this.auth.firebase.child("posts").child(urlTitle).set({
+    // save to posts
+    this.auth.postsRef.child(urlTitle).set({
       title: this.title,
       description: this.description,
-      author: this.account.email,
+      author: this.auth.account.email,
+      upvotes: 1,
+      downvotes: 0,
       date: Date()
     });
 
-    this.auth.firebase.child("users").child(this.account.uid).child("posts").push().set({
-      title: urlTitle
-    });
+    // save to user's posts
+    this.auth.usersRef.child(this.auth.account.uid).child('posts').child(urlTitle).set(true);
+
+    // save to user's votes
+    this.auth.usersRef.child(this.auth.account.uid).child('votes').child(urlTitle).set('upvote');
 
     this.router.navigate('posts');
 

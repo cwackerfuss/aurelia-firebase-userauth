@@ -2,7 +2,10 @@
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <h1>New Post by ${account.email}</h1>
+      <h1>New Post</h1>
+      <p>by ${auth.account.email}</p>
+      <button class="btn btn-default" click.delegate="fillForm()">Fill with Random Data</button>
+      </br></br>
       <form role="form" submit.delegate="post()" class="au-target">
         <div class="form-group">
           <label for="fn">Title</label>
@@ -10,9 +13,9 @@
         </div>
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea type="text" value.bind="description" class="form-control au-target" id="description"></textarea>
+          <textarea type="text" value.bind="description" class="form-control new-post-description au-target" id="description"></textarea>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
       </form>
 
     </div>

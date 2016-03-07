@@ -1,16 +1,12 @@
 import {bindable, inject} from 'aurelia-framework';
-import {FirebaseAuth} from 'services/auth';
+import {Auth} from 'services/auth';
 
-@inject(FirebaseAuth)
+@inject(Auth)
 export class NavBar {
 @bindable router;
 
-  constructor(firebaseAuth) {
-    this.auth = firebaseAuth;
-  }
-
-  attached() {
-    this.auth.getAccount();
+  constructor(auth) {
+    this.auth = auth;
   }
 
   logout() {
