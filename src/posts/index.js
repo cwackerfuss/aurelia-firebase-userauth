@@ -22,4 +22,47 @@ export class Posts {
 
   }
 
+  vote(postId, voteType) {
+
+    this.auth.thisUserRef.child("votes").child(postId).once('value').then((snapshot) => {
+
+      if (snapshot.exists()) {
+        // do nothing
+        console.log("Already Voted");
+      } else {
+        this.addVoteToPost(postId, voteType);
+      };
+
+    }, (error) => {
+      console.log("The read failed: " + error.code);
+    });
+
+  }
+
+  addVoteToPost(postId, voteType) {
+
+    var postVoteRef = this.auth.postsRef.child(postId);
+
+    if (voteType === 'upvote') {
+      postVoteRef = postVoteRef.child('upvotes');
+    } else {
+      postVoteRef = postVoteRef.child('downvotes');
+    }
+
+    postVoteRef.once('value').then((snapshot) => {
+      return snapshot.val();
+    }).then((voteValue) => {
+      voteValue += 1;
+      postVoteRef.set(voteValue);
+    }).then(() => {
+      this.addVoteToUser(postId, voteType);
+    });
+
+  }
+
+  addVoteToUser(postId, voteType) {
+    var userVoteRef = this.auth.thisUserRef.child('votes');
+    userVoteRef.child(postId).set(voteType);
+  }
+
 }

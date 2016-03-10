@@ -7,11 +7,11 @@
         <div class="posts__item post-${post.id}" repeat.for="post of posts">
 
           <div class="item__voting">
-            <button class="voting__button voting__button--up">
+            <button click.delegate="vote(post.id, 'upvote')" class="voting__button voting__button--up">
               <span class="vote-arrow glyphicon glyphicon-menu-up" aria-hidden="true"></span>
               <span class="vote-count">${post.upvotes}</span>
             </button>
-            <button class="voting__button voting__button--down">
+            <button click.delegate="vote(post.id, 'downvote')" class="voting__button voting__button--down">
               <span class="vote-count">${post.downvotes}</span>
               <span class="vote-arrow glyphicon glyphicon-menu-down" aria-hidden="true"></span>
             </button>

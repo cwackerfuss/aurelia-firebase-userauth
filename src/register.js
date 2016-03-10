@@ -1,9 +1,9 @@
 import Firebase from 'github:firebase/firebase-bower@2.4.1';
-import {FirebaseAuth} from 'services/auth';
+import {Auth} from 'services/auth';
 import {Router} from 'aurelia-router';
 import {inject} from 'aurelia-framework';
 
-@inject(Router, FirebaseAuth)
+@inject(Router, Auth)
 export class Register {
 
   heading = 'Register';
@@ -13,9 +13,9 @@ export class Register {
   hasFormError = false;
   formErrorMessage = '';
 
-  constructor(router, firebaseAuth) {
+  constructor(router, auth) {
     this.router = router;
-    this.auth = firebaseAuth;
+    this.auth = auth;
   }
 
   toggleFormError(error) {
@@ -40,7 +40,7 @@ export class Register {
   }
 
   addUser(uid) {
-    this.auth.firebase.child("users").child(uid).set({
+    this.auth.usersRef.child(uid).set({
       name: this.email.replace(/@.*/, ''),
       fullName: this.fullName
     });

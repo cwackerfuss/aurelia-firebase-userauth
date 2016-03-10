@@ -28,19 +28,19 @@ body {
 }
 .voting__button:hover,
 .voting__button:focus {
-  background-color: #ddd;
-
+  background-color: #efefef;
+  outline: none;
 }
 .voting__button:first-child {
   border-bottom: 1px solid #ddd;
 }
 .voting__button--up {
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 .voting__button--down {
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .vote-arrow, .vote-count {
   width: 100%;
@@ -48,6 +48,12 @@ body {
 .vote-count {
   font-weight: bold;
   font-size: 10px;
+}
+.voting__button--up .vote-count {
+  color: #27ae60;
+}
+.voting__button--down .vote-count {
+  color: #c0392b;
 }
 
 .page-host {

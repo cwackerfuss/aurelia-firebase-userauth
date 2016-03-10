@@ -14,20 +14,31 @@ export class Auth {
   getAccountDetails() {
 
     var authData = this.firebase.getAuth();
-
     if (authData) {
+      this.storeAccountDetails(authData);
+    } else {
+      this.account = null;
+    };
+
+  }
+
+  storeAccountDetails(authData) {
+
+    this.thisUserRef = this.usersRef.child(authData.uid);
+
+    this.thisUserRef.once('value').then((snapshot) => {
+
+      var userSnapshot = snapshot.val();
       this.account = {
+        fullName: userSnapshot.fullName,
         email: authData.password.email,
         avatar: authData.password.profileImageURL,
         uid: authData.uid
       };
 
-      this.thisUserRef = this.firebase.child(this.account.uid);
+    })
 
-    } else {
-      this.account = null;
-    };
-
+    console.log(this);
   }
 
   logout() {
