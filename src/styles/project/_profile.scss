@@ -1,0 +1,61 @@
+.profile-banner {
+  height: 300px;
+  width: 100%;
+  display: block;
+  background-color: #C5C5E6;
+}
+
+.profile {
+  display: flex;
+  &__img {
+    margin-right: 2rem;
+    transform: translateY(-50%);
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgba(0,0,0,0.5);
+      opacity: 0;
+      transition: opacity;
+      z-index: 1;
+    }
+
+    img {
+      width: 100px;
+      height: 100px;
+      position: relative;
+    }
+
+    .img__change {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      color: white;
+      font-size: 30px;
+      z-index: 2;
+    }
+
+    &:hover {
+      cursor: pointer;
+      &:before {
+        opacity: 1;
+      }
+      .img__change {
+        display: block;
+      }
+    }
+  }
+  &__name {
+
+  }
+}

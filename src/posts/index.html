@@ -1,31 +1,33 @@
 <template>
 
-  <div class="row">
-    <div class="col-md-12">
-      <h1>Current Posts</h1>
-      <div class="posts">
-        <div class="posts__item post-${post.id}" repeat.for="post of posts">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Current Posts</h1>
+        <div class="posts">
+          <div class="posts__item post-${post.id}" repeat.for="post of posts">
 
-          <div class="item__voting">
-            <button click.delegate="vote(post.id, 'upvote')" class="voting__button voting__button--up">
-              <span class="vote-arrow glyphicon glyphicon-menu-up" aria-hidden="true"></span>
-              <span class="vote-count">${post.upvotes}</span>
-            </button>
-            <button click.delegate="vote(post.id, 'downvote')" class="voting__button voting__button--down">
-              <span class="vote-count">${post.downvotes}</span>
-              <span class="vote-arrow glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-            </button>
+            <div class="item__voting">
+              <button click.delegate="vote(post.id, 'upvote')" class="voting__button voting__button--up">
+                <span class="vote-arrow glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+                <span class="vote-count">${post.upvotes}</span>
+              </button>
+              <button click.delegate="vote(post.id, 'downvote')" class="voting__button voting__button--down">
+                <span class="vote-count">${post.downvotes}</span>
+                <span class="vote-arrow glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+              </button>
+            </div>
+
+            <div class="item__details">
+              <a route-href="route: post; params.bind: { id: post.id }">
+                <h2>${post.title}</h2>
+              </a>
+              <p>${post.description}</p>
+              <p><strong>${post.author}</strong></p>
+              <p>${post.date}</p>
+            </div>
+
           </div>
-
-          <div class="item__details">
-            <a route-href="route: post; params.bind: { id: post.id }">
-              <h2>${post.title}</h2>
-            </a>
-            <p>${post.description}</p>
-            <p><strong>${post.author}</strong></p>
-            <p>${post.date}</p>
-          </div>
-
         </div>
       </div>
     </div>

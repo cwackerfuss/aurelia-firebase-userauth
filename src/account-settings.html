@@ -1,13 +1,26 @@
 <template>
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
 
-      <h1>${heading}</h1>
+  <div class="profile-banner">
+  </div>
 
-      <img src="${auth.account.avatar}">
-      <h2>${auth.account.email}</h2>
+  <div class="container">
 
+    <div class="profile">
+
+      <div click.delegate="handleFileSelect()" class="profile__img">
+        <img src="${auth.account.avatar}">
+        <span class="img__change glyphicon glyphicon-user"></span>
+      </div>
+
+      <div class="profile__name">
+        <h2>${auth.account.fullName}</h2>
+
+        <input class="hidden" type="file" accept="image/*" capture="camera" id="file-upload" style="display: inline-block;">
+
+      </div>
 
     </div>
+
   </div>
+
 </template>

@@ -1,0 +1,44 @@
+.voting__button {
+  width: 50px;
+  height: 50px;
+  border: none;
+  background-color: white;
+  transition: all 0.2s ease-in-out;
+
+  &:hover,
+  &:focus {
+    background-color: #efefef;
+    outline: none;
+  }
+
+  &:first-child {
+    border-bottom: 1px solid #ddd;
+  }
+
+  .vote-arrow,
+  .vote-count {
+    width: 100%;
+  }
+
+  .vote-count {
+    font-weight: bold;
+    font-size: 10px;
+  }
+
+  &--up {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    .vote-count {
+      color: #27ae60;
+    }
+  }
+
+  &--down {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    .vote-count {
+      color: #c0392b;
+    }
+  }
+
+}
